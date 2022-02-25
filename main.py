@@ -1,5 +1,6 @@
 from typing import Optional
 from fastapi import FastAPI
+from lucky_me import Course
 
 app = FastAPI()
 
@@ -31,3 +32,8 @@ def read_courses(course_id: int, q: Optional[str] = None):
     if q is not None:
         return {"course_name": course_items[course_id], "q": q}
     return {"course_name": course_items[course_id]}
+
+
+@app.post("/courses/")
+def create_course(course: Course):
+    return course
